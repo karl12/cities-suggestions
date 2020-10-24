@@ -25,7 +25,7 @@ public class SuggestionTest {
   @Test
   public void zurichNumberOne() {
     Suggestions suggestions = suggestionService.query("Zurich");
-    Assert.assertEquals("Zürich, ZH, CHE", suggestions.getSuggestions().get(0).getName());
+    Assert.assertEquals("Zurich, ZH, CHE", suggestions.getSuggestions().get(0).getName());
     Assert.assertEquals(1, suggestions.getSuggestions().get(0).getScore(), 0);
   }
 

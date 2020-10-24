@@ -108,7 +108,7 @@ public class CityInformation {
 
   public String toString(){
     StringBuilder stringBuilder = new StringBuilder();
-    stringBuilder.append(localName);
+    stringBuilder.append(englishName);
     stringBuilder.append(", ");
     if(!getIsoSubdivision().isBlank()) {
       stringBuilder.append(getIsoSubdivision());
