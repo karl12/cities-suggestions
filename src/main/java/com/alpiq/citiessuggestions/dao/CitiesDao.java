@@ -21,13 +21,19 @@ public class CitiesDao {
   // Incredibly slow to initialise or update, but very fast searching.
   private final Map<String, Set<SearchResult>> largeIndexMap = new HashMap<>();
 
+  //@Value("${app.minimumPopulation:100000}")
+  private int minimumPopulation = 100000;
+
+  //@Value("${app.minimumLocationWeight:0.7}")
+  private double minimumLocationWeight = 0.7;
+
 
   @PostConstruct
   public void init() throws IOException {
     List<CityInformation> cityLines = CitiesFileLoader.loadFile("cities15000.txt");
     cityLines.stream()
-      .filter(cityInformation -> cityInformation.getLocationSignificance().getWeighting() > 0.7)
-      .filter(cityInformation -> cityInformation.getPopulation() > 100000)
+      .filter(cityInformation -> cityInformation.getLocationSignificance().getWeighting() > minimumLocationWeight)
+      .filter(cityInformation -> cityInformation.getPopulation() > minimumPopulation)
       .forEach(cityLine -> {
         nameMap.putIfAbsent(cityLine.getEnglishName(), new HashSet<>());
         nameMap.get(cityLine.getEnglishName()).add(cityLine);
